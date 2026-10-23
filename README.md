@@ -1,5 +1,6 @@
 # spp
-
-Bypass_Frp_Setting.html
-
-open_chrome.html
+=========================
+html-страницы 
+https://maxi-info.github.io/spp/Bypass_Frp_Setting.html
+https://maxi-info.github.io/spp/open_chrome.html
+=========================
