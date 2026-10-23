@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- 注入google跟踪代码 -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFXNZG4');</script>
+<!-- End Google Tag Manager -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bypass Frp Setting</title>
+    <link rel="stylesheet"
+          href="https://itoolab.com/wp-content/themes/itoolab/assets/css/tailwind.css?v=8.3.8"
+          media="screen">
+      <link rel="icon" href="https://itoolab.com/favicon.ico">
+
+</head>
+<body class="flex flex-col min-h-screen">
+            <!-- 注入google跟踪代码 -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFXNZG4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="container max-w-screen-lg mx-auto md:px-0 px-5 md:pt-20">
+        <h2 class="text-4xl font-semibold py-12 text-center" id="heading">
+            Bypass Frp Setting
+        </h2>
+        <div class="grid md:grid-cols-2 grid-cols-1 md:gap-10 md:gap-x-6 gap-x-0 md:gap-y-4 gap-y-6 items-stretch">
+            <a href="intent://com.android.settings/#Intent;scheme=android-app;end">
+                <div class="shadow-ABABAB rounded-10px px-5 py-3 flex flex-row gap-4 items-center justify-start">
+                    <div>
+                        <svg class="inline-block align-middle w-10 fill-white" viewBox="0 0 50 50">
+                            <use xlink:href="#svg-setting"></use>
+                        </svg>
+                    </div>
+                    <div class="step">
+                        <p class="step-title text-itl-blue font-semibold mb-1">
+                            1. Click Open App Setting
+                        </p>
+                        <p class="step-info text-xs">
+                            Open Setting
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end">
+                <div class="shadow-ABABAB rounded-10px px-5 py-3 flex flex-row gap-4 items-center justify-start">
+                    <div>
+                        <svg class="inline-block align-middle w-10 fill-white" viewBox="0 0 50 50">
+                            <use xlink:href="#svg-unlock"></use>
+                        </svg>
+                    </div>
+                    <div class="step">
+                        <p class="step-title text-itl-blue font-semibold mb-1">
+                            2. Set Screen Lock
+                        </p>
+                        <p class="step-info text-xs">
+                            Open set screen Lock
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="tel:">
+                <div class="shadow-ABABAB rounded-10px px-5 py-3 flex flex-row gap-4 items-center justify-start">
+                    <div>
+                        <svg class="inline-block align-middle w-10 fill-white" viewBox="0 0 50 50">
+                            <use xlink:href="#svg-phone"></use>
+                        </svg>
+                    </div>
+                    <div class="step">
+                        <p class="step-title text-itl-blue font-semibold mb-1">
+                            3. Click to open Phone app
+                        </p>
+                        <p class="step-info text-xs">
+                            Open Phone call
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="text-center mt-5">
+            <span id="click-here"></span> <a href="/android-phone-unlocker/" class="text-itl-blue hover:underline" id="click"></a>
+        </div>
+
+        <p class="mt-5 text-5971AD text-center text-sm" id="hint">
+            100% safe and clean
+        </p>
+
+        <div class="mt-10 text-center">
+            <label for="lang">
+                <select class="align-middle w-24" id="lang" onchange="changeLang(this.value)">
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                    <option value="it">Italiano</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
+                    <option value="cn">简体中文</option>
+                    <option value="tw">繁體中文</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </label>
+
+        </div>
+
+    </div>
+
+    <script>
+        const browserLang = navigator.language;
+        console.log(navigator.language);
+        const heading = document.getElementById('heading');
+        const hint = document.getElementById('hint');
+        const clickHere = document.getElementById('click-here');
+        const click = document.getElementById('click');
+        const steps = document.querySelectorAll('.step');
+        const LANGUAGES = {
+            en: {
+                heading: 'Bypass Frp Setting',
+                steps: [
+                    {
+                        title: '1. Click Open App Setting',
+                        info: 'Open Setting',
+                    },
+                    {
+                        title: '2. Set Screen Lock',
+                        info: 'Open set screen Lock',
+                    },
+                    {
+                        title: '3. Click to open Phone app',
+                        info: 'Open Phone call',
+                    }
+                ],
+                hint: '100% safe and clean',
+                click_here: "Free Download iToolab FRP Bypass Tool",
+                click: "Click Here"
+            },
+            cn: {
+                heading: '绕过FRP设置',
+                steps: [
+                    {
+                        title: '1. 点击打开App设置',
+                        info: '打开设置',
+                    },
+                    {
+                        title: '2. 设置屏幕锁',
+                        info: '打开设置屏幕锁',
+                    },
+                    {
+                        title: '3. 点击打开通话入口',
+                        info: '打开通话入口',
+                    }
+                ],
+                hint: '100% 安全与干净',
+                click_here: "免费下载iToolab FRP解锁工具",
+                click: "点击下载"
+            },
+            tw: {
+                heading: '繞過 Frp 設置',
+                steps: [
+                    {
+                        title: '1. 點擊打開應用設置',
+                        info: '打開設置',
+                    },
+                    {
+                        title: '2. 設置屏幕鎖定',
+                        info: '打開設置屏幕鎖定',
+                    },
+                    {
+                        title: '3. 點擊打開電話應用',
+                        info: '打開電話',
+                    }
+                ],
+                hint: '100% 安全和清潔',
+                click_here: "免費下載iToolab FRP解鎖工具",
+                click: "點擊下載"
+            },
+            fr: {
+                heading: 'Paramètre Frp de contournement',
+                steps: [
+                    {
+                        title: '1. Cliquez sur Ouvrir les paramètres de l\'application',
+                        info: 'Ouvrir le paramètre',
+                    },
+                    {
+                        title: '2. Définir le verrouillage de l\'écran',
+                        info: 'Ouvrir l\'écran de réglage Verrouiller',
+                    },
+                    {
+                        title: '3. Cliquez pour ouvrir l\'application Téléphone',
+                        info: 'Appel téléphonique ouvert',
+                    }
+                ],
+                hint: '100% sûr et propre',
+                click_here: "Téléchargez gratuitement l'outil de contournement FRP iToolab",
+                click: "Cliquez ici"
+            },
+            de: {
+                heading: 'Bypass-Frp-Einstellung',
+                steps: [
+                    {
+                        title: '1. Klicken Sie auf App-Einstellung öffnen',
+                        info: 'Öffnen Sie die Einstellung',
+                    },
+                    {
+                        title: '2. Stellen Sie die Bildschirmsperre ein',
+                        info: 'Bildschirmsperre öffnen',
+                    },
+                    {
+                        title: '3. Klicken Sie auf , um die Telefon-App zu öffnen',
+                        info: 'Telefonanruf öffnen',
+                    }
+                ],
+                hint: '100% sicher und sauber',
+                click_here: "Kostenloser Download des iToolab FRP Bypass Tools",
+                click: "Hier klicken"
+            },
+            ja: {
+                heading: 'Googleアカウントの認証を解除',
+                steps: [
+                    {
+                        title: '1. クリックしてアプリ設定を開きます',
+                        info: '設定を開く',
+                    },
+                    {
+                        title: '2. 画面ロックを設定する',
+                        info: '設定画面ロックを開く',
+                    },
+                    {
+                        title: '3. クリックして通話エントリを開きます',
+                        info: '通話エントリを開く',
+                    }
+                ],
+                hint: '100% 安全で清潔',
+                click_here: "iToolab FRP バイパス ツールを無料でダウンロード",
+                click: "ここをクリック"
+            },
+            es: {
+                heading: 'Configuración de omisión de Frp',
+                steps: [
+                    {
+                        title: '1. Haga clic en Abrir configuración de la aplicación',
+                        info: 'Ajuste abierto',
+                    },
+                    {
+                        title: '2. Establecer bloqueo de pantalla',
+                        info: 'Abrir pantalla de configuración Bloquear',
+                    },
+                    {
+                        title: '3. Haga clic para abrir la aplicación Teléfono',
+                        info: 'Llamada telefónica abierta',
+                    }
+                ],
+                hint: '100% seguro y limpio',
+                click_here: "Descarga gratuita de la herramienta iToolab FRP Bypass",
+                click: "Haga clic aquí"
+            },
+            ru: {
+                heading: 'Обход настроек FRP',
+                steps: [
+                    {
+                        title: '1. Нажмите «Открыть настройки приложения».',
+                        info: 'Открыть настройку',
+                    },
+                    {
+                        title: '2. Установите блокировку экрана',
+                        info: 'Открыть блокировку экрана',
+                    },
+                    {
+                        title: '3. Нажмите, чтобы открыть приложение «Телефон».',
+                        info: 'Открытый телефонный звонок',
+                    }
+                ],
+                hint: '100% безопасно и чисто',
+                click_here: "Скачать бесплатно инструмент обхода FRP iToolab",
+                click: "Кликните сюда"
+            },
+            pt: {
+                heading: 'Ignorar configuração FRP',
+                steps: [
+                    {
+                        title: '1. Clique em Abrir configuração do aplicativo',
+                        info: 'Configuração aberta',
+                    },
+                    {
+                        title: '2. Definir bloqueio de tela',
+                        info: 'Abrir bloqueio de tela de configuração',
+                    },
+                    {
+                        title: '3. Clique para abrir o aplicativo Telefone',
+                        info: 'Chamada telefônica aberta',
+                    }
+                ],
+                hint: '100% seguro e limpo',
+                click_here: "Baixe grátis a ferramenta iToolab FRP Bypass",
+                click: "Clique aqui"
+            },
+            it: {
+                heading: 'Bypassare l\'impostazione Frp',
+                steps: [
+                    {
+                        title: '1. Fare clic su Apri impostazione app',
+                        info: 'Apri Impostazioni',
+                    },
+                    {
+                        title: '2. Impostare Blocco schermo',
+                        info: 'Apri Blocco schermo impostato',
+                    },
+                    {
+                        title: '3. Fare clic per aprire l\'app Telefono',
+                        info: 'Apri Telefonata',
+                    }
+                ],
+                hint: '100% sicuro e pulito',
+                click_here: "Scarica gratuitamente lo strumento di bypass FRP iToolab",
+                click: "Clicca qui"
+            },
+        };
+
+        window.onload = function () {
+            document.querySelector('html').lang = browserLang
+            console.log(browserLang.toLowerCase().indexOf('zd'));
+            let lang;
+            if (browserLang.toLowerCase().indexOf('tw') > 0 || browserLang.toLowerCase().indexOf('hk') > 0) {
+                // cn
+                lang = 'tw'
+            } else if (browserLang.toLowerCase().indexOf('zh') >= 0) {
+                lang = 'cn'
+                // tw || hk
+            } else {
+                lang = browserLang.toLowerCase().substring(0, 2);
+            }
+            changeLang(lang)
+
+            document.querySelector('#lang').value = lang
+        }
+
+        function changeLang(lang) {
+            const language = LANGUAGES[lang];
+            console.log(lang);
+            if (language) {
+                heading.innerText = language.heading
+                hint.innerText = language.hint
+                clickHere.innerText = language.click_here
+                click.innerText = language.click
+                steps.forEach((step, i) => {
+                    step.querySelector('.step-title').innerHTML = language.steps[i].title
+                    step.querySelector('.step-info').innerHTML = language.steps[i].info
+                })
+            }
+        }
+    </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"a201a5605a394737b415d18bef2ec395","spa":2}' crossorigin="anonymous"></script>
+</body>
+
+<aside>
+    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="svg-setting">
+            <g stroke="none" stroke-width="1">
+                <g transform="translate(-468.000000, -251.000000)">
+                    <g transform="translate(468.000000, 251.000000)">
+                        <rect fill="#5971AD" x="0" y="0" width="50" height="50" rx="10"></rect>
+                        <g transform="translate(10.000000, 10.000000)">
+                            <rect fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="30" height="30"></rect>
+                            <path d="M28.753125,12.609375 C28.746875,12.553125 28.740625,12.50625 28.73125,12.478125 L28.73125,12.453125 L28.71875,12.384375 C28.496875,11.303125 27.78125,10.60625 26.890625,10.60625 L26.74375,10.60625 C25.225,10.60625 23.99375,9.36875 23.99375,7.85625 C23.99375,7.50625 24.15625,7.009375 24.225,6.834375 C24.65625,5.828125 24.196875,4.68125 23.13125,4.096875 L19.778125,2.2 L19.715625,2.178125 C19.465625,2.096875 19.175,2 18.85,2 C18.24375,2 17.5625,2.28125 17.140625,2.703125 C16.6125,3.225 15.540625,4.003125 14.903125,4.003125 C14.26875,4.003125 13.19375,3.228125 12.665625,2.703125 C12.215625,2.259375 11.59375,2 10.95625,2 C10.621875,2 10.340625,2.09375 10.090625,2.178125 L10.034375,2.2 L6.51875,4.103125 L6.496875,4.115625 C5.64375,4.65 5.296875,5.875 5.73125,6.846875 L5.7375,6.859375 L5.74375,6.871875 C5.8125,7.025 6.025,7.54375 6.025,7.996875 C6.025,9.515625 4.7875,10.746875 3.275,10.746875 L3.128125,10.746875 C2.196875,10.746875 1.5,11.434375 1.3,12.5375 L1.2875,12.6 L1.2875,12.621875 C1.2875,12.653125 1.275,12.696875 1.265625,12.753125 C1.1875,13.225 1,14.3375 1,15.246875 C1,16.15625 1.184375,17.26875 1.265625,17.740625 C1.271875,17.796875 1.278125,17.84375 1.2875,17.871875 L1.2875,17.896875 L1.3,17.965625 C1.521875,19.046875 2.2375,19.74375 3.128125,19.74375 L3.203125,19.74375 C4.721875,19.74375 5.953125,20.98125 5.953125,22.49375 C5.953125,22.84375 5.790625,23.340625 5.721875,23.515625 C5.30625,24.4625 5.7,25.678125 6.61875,26.290625 L6.64375,26.303125 L9.95625,28.146875 L10.01875,28.16875 C10.26875,28.25 10.553125,28.346875 10.878125,28.346875 C11.571875,28.346875 12.196875,28.08125 12.5875,27.64375 C12.625,27.615625 12.6625,27.578125 12.70625,27.540625 C13.10625,27.190625 14.18125,26.265625 14.890625,26.265625 C15.41875,26.265625 16.303125,26.81875 17.19375,27.709375 C17.64375,28.153125 18.265625,28.4125 18.903125,28.4125 C19.334375,28.4125 19.653125,28.29375 20.015625,28.115625 L20.028125,28.109375 L23.425,26.23125 L23.4375,26.21875 C24.290625,25.684375 24.6375,24.459375 24.203125,23.4875 L24.196875,23.475 L24.190625,23.4625 C24.184375,23.459375 23.91875,22.90625 23.96875,22.409375 L23.975,22.378125 L23.975,22.346875 C23.975,20.828125 25.2125,19.596875 26.725,19.596875 L26.88125,19.596875 C27.8125,19.596875 28.509375,18.909375 28.709375,17.80625 L28.721875,17.74375 L28.721875,17.721875 C28.728125,17.696875 28.734375,17.659375 28.74375,17.609375 C28.825,17.15 29.012655,16.078125 29.012655,15.096875 C29.01875,14.190625 28.834375,13.08125 28.753125,12.609375 L28.753125,12.609375 Z M15.003125,19.559375 C12.6,19.559375 10.653125,17.6125 10.653125,15.209375 C10.653125,12.80625 12.6,10.859375 15.003125,10.859375 C17.40625,10.859375 19.353125,12.80625 19.353125,15.209375 C19.353125,17.6125 17.40625,19.559375 15.003125,19.559375 L15.003125,19.559375 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </symbol>
+        <symbol id="svg-unlock">
+            <g stroke="none" stroke-width="1">
+                <g transform="translate(-998.000000, -251.000000)">
+                    <g transform="translate(998.000000, 251.000000)">
+                        <rect fill="#F3A440" x="0" y="0" width="50" height="50" rx="10"></rect>
+                        <g transform="translate(10.000000, 10.000000)">
+                            <rect fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="30" height="30"></rect>
+                            <path d="M17.1009375,13.4146875 L17.1009375,9.4140625 C17.1009375,7.0775 18.995,5.1834375 21.3315625,5.1834375 C23.6678125,5.1834375 25.561875,7.0775 25.561875,9.4140625 C25.561875,10.215 26.21125,10.864375 27.0121875,10.864375 C27.813125,10.864375 28.4625,10.215 28.4625,9.4140625 C28.305625,5.6059375 25.1728125,2.6 21.3615625,2.6 C17.5503125,2.6 14.4178125,5.60625 14.260625,9.4140625 L14.260625,13.4146875"></path>
+                            <path d="M19.6525,27.4403125 L5.148125,27.4403125 C3.30375,27.4403125 1.806875,25.94875 1.8,24.104375 L1.8,15.945625 C1.8,14.10125 3.2915625,12.6040625 5.1359375,12.5975 L19.6403125,12.5975 C21.4846875,12.6040625 22.97625,14.10125 22.97625,15.945625 L22.97625,24.1040625 C22.97,25.9390625 21.4875,27.426875 19.6525,27.4403125 Z M14.72125,18.0971875 C14.7246875,16.9828125 13.94,16.0215625 12.8475,15.8025 C11.755,15.5834375 10.66,16.1675 10.2334375,17.1965625 C9.806875,18.2259375 10.1678125,19.413125 11.095,20.0309375 L11.095,22.9921875 C11.1015625,23.701875 11.67875,24.2734375 12.3884375,24.2734375 C12.7335349,24.2799071 13.066901,24.1481643 13.314345,23.9075286 C13.561789,23.6668928 13.7027789,23.3373311 13.7059375,22.9921875 L13.7059375,20.0309375 C14.3471607,19.5973303 14.7284021,18.8712232 14.72125,18.0971875 L14.72125,18.0971875 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </symbol>
+        <symbol id="svg-phone">
+            <g stroke="none" stroke-width="1">
+                <g transform="translate(-468.000000, -351.000000)">
+                    <g transform="translate(468.000000, 351.000000)">
+                        <rect fill="#57D366" x="0" y="0" width="50" height="50" rx="10"></rect>
+                        <g transform="translate(10.000000, 10.000000)">
+                            <rect fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="30" height="30"></rect>
+                            <path d="M22.9683125,18.1711875 C20.8969687,18.1711875 19.1289062,19.46925 18.432875,21.2962187 C18.4309687,21.295375 18.4348125,21.2970312 18.432875,21.2962187 C18.4260625,21.3159062 18.4147187,21.3334687 18.4005625,21.3504062 C18.3537187,21.406375 18.2750625,21.42625 18.2094062,21.4060938 C18.2092812,21.4066563 18.2095312,21.4055312 18.2094062,21.4060938 C13.6872812,19.7377187 10.10125,16.1398125 8.44878125,11.6100313 C8.4441875,11.5945625 8.44090625,11.5785625 8.44090625,11.561625 C8.44090625,11.4886563 8.48484375,11.4252188 8.548125,11.3985313 C8.54796875,11.39825 8.54828125,11.3988125 8.548125,11.3985313 C10.3911562,10.7106562 11.703875,8.93484375 11.703875,6.8519375 C11.703875,4.17228125 9.53159375,2 6.8519375,2 C4.17228125,2 2,4.17228125 2,6.8519375 C2,6.8688125 2.00046875,6.88559375 2.000625,6.9024375 C2.4751875,18.2724688 11.6025937,27.4004688 22.972625,27.875 C25.6502812,27.8726562 27.82025,25.7013437 27.82025,23.023125 C27.82025,20.3434687 25.6479687,18.1711875 22.9683125,18.1711875 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </symbol>
+        <symbol id="svg-arrow">
+            <g stroke="none" stroke-width="1" >
+                <g transform="translate(-988.000000, -503.000000)">
+                    <g transform="translate(988.000000, 503.000000)">
+                        <g transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) ">
+                            <rect fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="12" height="12"></rect>
+                            <path d="M0.543969678,3.84235466 L5.60677709,9.00810669 C5.80290652,9.208227 6.12514564,9.208227 6.32128785,9.00810669 L11.3840825,3.84235466 C11.6943233,3.52580769 11.470053,2.992 11.0268335,2.992 L0.901231453,2.992 C0.457999165,2.992 0.233728815,3.52580769 0.543969678,3.84235466 Z" fill="#333333" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </symbol>
+    </svg>
+</aside>
+</html>

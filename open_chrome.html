@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Intent-ссылка для Chrome</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f5f7fa;
+      }
+      .card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 400px;
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+      p {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+      a.btn {
+        display: inline-block;
+        padding: 14px 28px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+      a.btn:hover {
+        background-color: #0056b3;
+      }
+      .note {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Открыть в Chrome</h2>
+      <p>Эта ссылка попытается открыть страницу в браузере Chrome на Android.</p>
+      <!-- Intent-ссылка -->
+      <a href="intent://example.com/#Intent;scheme=https;package=com.android.chrome;end" class="btn">Открыть в Chrome</a>
+      <div class="note">
+        Работает только на Android. Если Chrome не установлен — система предложит выбрать другой браузер.
+      </div>
+    </div>
+  </body>
+</html>
