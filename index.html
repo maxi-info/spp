@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>maxi-info/spp — файлы</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --hover: #1f2937;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 12px 20px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  header .repo {
+    color: var(--muted);
+    font-size: 13px;
+    font-family: ui-monospace, monospace;
+  }
+  header .repo a { color: var(--accent); text-decoration: none; }
+  header .repo a:hover { text-decoration: underline; }
+  .search {
+    margin-left: auto;
+    padding: 6px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    width: 220px;
+  }
+  .search:focus { outline: 2px solid var(--accent); }
+  .layout { display: flex; flex: 1; overflow: hidden; }
+  aside {
+    width: 360px;
+    min-width: 220px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .tree { list-style: none; padding: 0; margin: 0; }
+  .tree .folder > .children { padding-left: 14px; }
+  .tree details > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 13px;
+    user-select: none;
+  }
+  .tree details > summary::-webkit-details-marker { display: none; }
+  .tree details > summary::before {
+    content: "▸";
+    transition: transform .15s;
+    display: inline-block;
+  }
+  .tree details[open] > summary::before { transform: rotate(90deg); }
+  .tree details > summary:hover { background: var(--hover); }
+  .file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px 4px 30px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .file:hover { background: var(--hover); }
+  .file.active {
+    background: var(--hover);
+    border-left-color: var(--accent);
+    color: var(--accent);
+  }
+  .file .icon { width: 14px; text-align: center; opacity: .8; flex-shrink: 0; }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .preview-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+  }
+  .preview-header .path {
+    font-family: ui-monospace, monospace;
+    color: var(--muted);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .preview-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    gap: 20px;
+  }
+  .preview-body .empty {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+  .preview-body .empty .big { font-size: 42px; display: block; margin-bottom: 8px; }
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--panel);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .btn:hover { background: var(--hover); border-color: var(--muted); }
+  .btn.primary {
+    background: #238636;
+    border-color: #2ea043;
+    color: #fff;
+  }
+  .btn.primary:hover { background: #2ea043; }
+  .btn.hidden { display: none; }
+  .hint {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+  .hint code {
+    background: var(--panel);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .loading, .error {
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .error { color: #ff7b72; }
+  .error code { background: var(--panel); padding: 2px 6px; border-radius: 4px; }
+  @media (max-width: 700px) { aside { width: 220px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📂 Файлы репозитория</h1>
+  <span class="repo" id="repoName"></span>
+  <input type="text" class="search" id="search" placeholder="Фильтр файлов...">
+</header>
+
+<div class="layout">
+  <aside><ul class="tree" id="tree"><li class="loading">Загрузка файлов...</li></ul></aside>
+  <main>
+    <div class="preview-header">
+      <span class="path" id="currentPath">— файл не выбран —</span>
+    </div>
+    <div class="preview-body">
+      <div class="empty" id="placeholder">
+        <span class="big">📄</span>
+        Выберите файл в списке слева,<br>
+        затем откройте его как страницу или скачайте.
+      </div>
+      <div class="actions" id="actions" style="display:none">
+        <a class="btn primary" id="openBtn" href="#" target="_blank" rel="noopener">
+          🌐 Открыть как сайт
+        </a>
+        <a class="btn" id="downloadBtn" href="#" download>
+          ⬇️ Скачать
+        </a>
+      </div>
+      <div class="hint" id="hint" style="display:none"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+(async function () {
+  // ================== НАСТРОЙКИ ==================
+  const OWNER  = 'maxi-info';
+  const REPO   = 'spp';
+  const BRANCH = null;              // null → ветка по умолчанию
+  const CACHE_TTL = 60 * 60 * 1000; // 1 час
+
+  // Базовый URL GitHub Pages (по нему открываются файлы как сайт)
+  const PAGES_BASE = `https://${OWNER}.github.io/${REPO}`;
+  // ===============================================
+
+  const apiBase = `https://api.github.com/repos/${OWNER}/${REPO}`;
+  const rawBase = `https://raw.githubusercontent.com/${OWNER}/${REPO}`;
+  const ghPage  = `https://github.com/${OWNER}/${REPO}`;
+
+  document.getElementById('repoName').innerHTML =
+    `<a href="${ghPage}" target="_blank" rel="noopener">${OWNER}/${REPO}</a>
+     &nbsp;·&nbsp;
+     <a href="${PAGES_BASE}/" target="_blank" rel="noopener">Pages</a>`;
+
+  let currentBranch = 'main';
+
+  // ---------- Ветка по умолчанию ----------
+  async function getDefaultBranch() {
+    if (BRANCH) return BRANCH;
+    try {
+      const r = await fetch(apiBase, { headers: { 'Accept': 'application/vnd.github+json' } });
+      if (r.ok) {
+        const data = await r.json();
+        return data.default_branch || 'main';
+      }
+    } catch (e) {}
+    return 'main';
+  }
+
+  // ---------- Дерево файлов ----------
+  async function fetchTree(branch) {
+    const cacheKey = `ghtree:${OWNER}/${REPO}@${branch}`;
+    try {
+      const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+      if (cached && Date.now() - cached.ts < CACHE_TTL) {
+        return { branch, tree: cached.tree, fromCache: true };
+      }
+    } catch (e) {}
+
+    const url = `${apiBase}/git/trees/${encodeURIComponent(branch)}?recursive=1`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } });
+
+    if (!res.ok) {
+      const alt = branch === 'main' ? 'master' : 'main';
+      const altRes = await fetch(
+        `${apiBase}/git/trees/${encodeURIComponent(alt)}?recursive=1`,
+        { headers: { 'Accept': 'application/vnd.github+json' } }
+      );
+      if (altRes.ok) {
+        const altData = await altRes.json();
+        const tree = altData.tree.filter(i => i.type === 'blob');
+        try {
+          localStorage.setItem(
+            `ghtree:${OWNER}/${REPO}@${alt}`,
+            JSON.stringify({ ts: Date.now(), tree })
+          );
+        } catch (e) {}
+        return { branch: alt, tree, fromCache: false };
+      }
+      throw new Error(`GitHub API: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    const tree = data.tree.filter(i => i.type === 'blob');
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), tree }));
+    } catch (e) {}
+    return { branch, tree, fromCache: false };
+  }
+
+  // ---------- Построение дерева ----------
+  function buildTree(files) {
+    const root = { children: {}, files: [] };
+    for (const f of files) {
+      const parts = f.path.split('/');
+      let node = root;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const p = parts[i];
+        node.children[p] = node.children[p] || { children: {}, files: [] };
+        node = node.children[p];
+      }
+      node.files.push({ name: parts[parts.length - 1], path: f.path });
+    }
+    return root;
+  }
+
+  const iconFor = (name) => {
+    const ext = name.split('.').pop().toLowerCase();
+    if (ext === 'html' || ext === 'htm') return '🌐';
+    if (ext === 'css') return '🎨';
+    if (ext === 'js' || ext === 'mjs' || ext === 'cjs') return '📜';
+    if (ext === 'ts') return '📘';
+    if (ext === 'json') return '🧾';
+    if (['png','jpg','jpeg','gif','svg','webp','ico','bmp','avif'].includes(ext)) return '🖼️';
+    if (ext === 'md') return '📝';
+    if (ext === 'pdf') return '📕';
+    if (['zip','rar','7z','tar','gz'].includes(ext)) return '📦';
+    if (['mp4','webm','mov'].includes(ext)) return '🎬';
+    if (['mp3','wav','ogg'].includes(ext)) return '🎵';
+    return '📄';
+  };
+
+  function renderNode(node, parentEl) {
+    for (const name of Object.keys(node.children).sort()) {
+      const li = document.createElement('li');
+      li.className = 'folder';
+      const details = document.createElement('details');
+      details.open = true;
+      const summary = document.createElement('summary');
+      summary.textContent = name;
+      details.appendChild(summary);
+      const ul = document.createElement('ul');
+      ul.className = 'children tree';
+      renderNode(node.children[name], ul);
+      details.appendChild(ul);
+      li.appendChild(details);
+      parentEl.appendChild(li);
+    }
+    for (const file of node.files.sort((a, b) => a.name.localeCompare(b.name))) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.className = 'file';
+      a.dataset.path = file.path;
+      a.dataset.name = file.name;
+      a.innerHTML = `<span class="icon">${iconFor(file.name)}</span><span>${file.name}</span>`;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectFile(file.path, a);
+      });
+      li.appendChild(a);
+      parentEl.appendChild(li);
+    }
+  }
+
+  // ---------- Формирование ссылки на Pages ----------
+  // Правила:
+  //  - index.html в корне         → https://USER.github.io/REPO/
+  //  - path/index.html в подпапке → https://USER.github.io/REPO/path/
+  //  - остальные файлы            → https://USER.github.io/REPO/path/file.ext
+  function pagesUrlFor(path) {
+    if (path === 'index.html') return `${PAGES_BASE}/`;
+    if (path.endsWith('/index.html')) {
+      return `${PAGES_BASE}/${path.slice(0, -'index.html'.length)}`;
+    }
+    const encoded = path.split('/').map(encodeURIComponent).join('/');
+    return `${PAGES_BASE}/${encoded}`;
+  }
+
+  // ---------- Выбор файла ----------
+  const currentPathEl = document.getElementById('currentPath');
+  const placeholderEl = document.getElementById('placeholder');
+  const actionsEl     = document.getElementById('actions');
+  const openBtn       = document.getElementById('openBtn');
+  const downloadBtn   = document.getElementById('downloadBtn');
+  const hintEl        = document.getElementById('hint');
+
+  function selectFile(path, linkEl) {
+    document.querySelectorAll('.file.active').forEach(el => el.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    currentPathEl.textContent = path;
+
+    const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+    const ext = path.split('.').pop().toLowerCase();
+    const isHtml = ext === 'html' || ext === 'htm';
+
+    const rawUrl   = `${rawBase}/${currentBranch}/${encodedPath}`;
+    const pagesUrl = pagesUrlFor(path);
+
+    // «Открыть как сайт» — всегда через GitHub Pages
+    openBtn.href = pagesUrl;
+    openBtn.textContent = isHtml ? '🌐 Открыть как сайт' : '🔗 Открыть файл';
+
+    // «Скачать» — raw-файл
+    downloadBtn.href = rawUrl;
+    downloadBtn.setAttribute('download', path.split('/').pop());
+
+    // Подсказка
+    hintEl.style.display = 'block';
+    if (isHtml) {
+      hintEl.innerHTML =
+        `HTML открывается через GitHub Pages: <code>${pagesUrl}</code>`;
+    } else {
+      hintEl.innerHTML =
+        `Файл открывается по адресу Pages: <code>${pagesUrl}</code>` +
+        ` (если Pages ещё не подхватил файл — обновите через минуту).`;
+    }
+
+    placeholderEl.style.display = 'none';
+    actionsEl.style.display = 'flex';
+  }
+
+  // ---------- Фильтр ----------
+  document.getElementById('search').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.file').forEach(a => {
+      const match = !q || a.dataset.path.toLowerCase().includes(q);
+      a.parentElement.style.display = match ? '' : 'none';
+    });
+  });
+
+  // ---------- Старт ----------
+  try {
+    const branch = await getDefaultBranch();
+    const { tree, fromCache, branch: usedBranch } = await fetchTree(branch);
+    currentBranch = usedBranch;
+
+    const treeData = buildTree(tree);
+    const treeEl = document.getElementById('tree');
+    treeEl.innerHTML = '';
+    renderNode(treeData, treeEl);
+
+    if (fromCache) console.info('[spp] Дерево из кэша localStorage.');
+
+    // Автооткрытие index.html (ведёт на https://maxi-info.github.io/spp/)
+    const indexLink = document.querySelector('.file[data-path="index.html"]');
+    if (indexLink) indexLink.click();
+  } catch (err) {
+    document.getElementById('tree').innerHTML =
+      `<li class="error">
+        Ошибка: ${err.message}<br><br>
+        Проверьте:<br>
+        • репозиторий публичный;<br>
+        • имя <code>${OWNER}/${REPO}</code> верное;<br>
+        • не превышен лимит GitHub API (60/час).
+      </li>`;
+  }
+})();
+</script>
+</body>
+</html>
